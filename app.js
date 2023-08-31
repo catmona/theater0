@@ -12,7 +12,7 @@ async function submitForm(e) {
 }
 
 async function fetchImdbId(title) {
-    const res = await fetch("http://www.omdbapi.com/?t=" + title.replace(/ /g, '+') + "&apikey=edb86f79");
+    const res = await fetch("https://www.omdbapi.com/?t=" + title.replace(/ /g, '+') + "&apikey=edb86f79");
     const movie = await res.json();
     console.log(movie);
     
