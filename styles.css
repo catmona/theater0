@@ -1,0 +1,109 @@
+* {
+    border-radius: 5px;
+}
+
+body {
+    background-color: #1a1d21;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+
+    flex-direction: column;
+}
+
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.media-form {
+    border: 1.5px solid white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #222529;
+    box-shadow: 3px 3px 10px black;
+}
+
+.media-label {
+    font-weight: 500;
+    text-shadow: 1.5px 1.5px 2px black;
+}
+
+input {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 5px;
+    margin: 0px;
+    text-align: center;
+    box-shadow: 0px 0px 10px black;
+}
+
+input::placeholder {
+    color: grey;
+}
+
+.media-input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.media-input-name {
+    width: 60%;
+}
+
+.media-input-checkbox {
+    
+}
+
+.media-input-number {
+    width: 30px;
+    display: flex;
+    align-items: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.media-submit {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0px 0px 10px black;
+}
+
+.vid-container {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #222529;
+    margin-top: 30px;
+    box-shadow: 3px 3px 10px black;
+}
+
+#embedsrc {
+    margin-left: auto;
+    margin-right: auto;
+}
