@@ -13,32 +13,51 @@
             The Show Looker-Upper-inator!
         </h1>
     </div>
-    <div class="form-container">
-        <form onSubmit="submitForm(event)" class="media-form">
+    <div class="top-container">
+        <div class="form-container">
+            <form onSubmit="submitForm(event)" class="media-form">
+                
+                <div class="media-input-group">
+                    <label class="media-label">Title</label>
+                    <input class="media-input-name" id="fname" name="mediaName" type="text" placeholder="name of show"/>
+                </div>
+    
+                <!-- <div class="media-input-group">
+                    <label class="media-label">Series</label>
+                    <input class="media-input-checkbox" id="ftype" name="mediaType" type="checkbox"/>
+                </div> -->
+    
+                <div class="media-input-group">
+                    <label class="media-label">Season</label>
+                    <input class="media-input-number" id="fseason" name="mediaSeason" type="number" placeholder="0"/>
+                </div>
+               
+                <div class="media-input-group">
+                    <label class="media-label">Episode</label>
+                    <input class="media-input-number" id="fepisode" name="mediaEpisode" type="number" placeholder="0"/>
+                </div>
+                
+                <button class="media-submit" type="submit">Submit</button>
+            </form>
+        </div>
+        <div id="details-container">
+            <h1 id="d-title"></h1>
+            <div class="row">
+                <img id="d-poster" />
+                <div class="details-list">
+                    <h3 id="d-genre"></h3>
+                    <h3 id="d-year"></h3>
+                    <h3 id="d-metascore"></h3>
+                    <h3 id="d-rating"></h3>
+                    <h3 id="d-runtime"></h3>
+                    <h3 id="d-seasons"></h3>
+                    
+                </div>
+            </div>
             
-            <div class="media-input-group">
-                <label class="media-label">Title</label>
-                <input class="media-input-name" id="fname" name="mediaName" type="text" placeholder="name of show"/>
-            </div>
-
-            <div class="media-input-group">
-                <label class="media-label">Series</label>
-                <input class="media-input-checkbox" id="ftype" name="mediaType" type="checkbox"/>
-            </div>
-
-            <div class="media-input-group">
-                <label class="media-label">Season</label>
-                <input class="media-input-number" id="fseason" name="mediaSeason" type="number" placeholder="0"/>
-            </div>
-           
-            <div class="media-input-group">
-                <label class="media-label">Episode</label>
-                <input class="media-input-number" id="fepisode" name="mediaEpisode" type="number" placeholder="0"/>
-            </div>
-            
-            <button class="media-submit" type="submit">Submit</button>
-        </form>
+        </div>
     </div>
+    
     <div class="vid-container">
         <iframe width="600" height="600" allowfullscreen="true" id="embedsrc">
 

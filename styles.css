@@ -11,6 +11,43 @@ body {
     flex-direction: column;
 }
 
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1.5px solid white;
+    padding: 15px;
+    background-color: #222529;
+    box-shadow: 3px 3px 10px black;
+    display: none;
+}
+
+#d-title {
+    margin-top: 0px;
+}
+
+#d-poster {
+    width: 200px;
+    border: none;
+}
+
+.details-list {
+    
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: none;
+}
+
 h1 {
     margin-left: auto;
     margin-right: auto;
@@ -20,6 +57,7 @@ h1 {
 .form-container {
     display: flex;
     justify-content: center;
+    width: 30%;
 }
 
 .media-form {
@@ -30,6 +68,7 @@ h1 {
     justify-content: space-around;
     background-color: #222529;
     box-shadow: 3px 3px 10px black;
+    flex-grow: 1;
 }
 
 .media-label {
