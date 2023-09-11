@@ -1,15 +1,23 @@
 async function submitForm(e) {
     e.preventDefault();
-    let isShow = false;
+    clearTimeout(timer);
+    document.getElementById("search-results").style.display = "none";
+    
     const name = document.getElementById("fname").value;
+    const video = await fetchImdbId(name)
+    
+    setVideo(video)
+}
+
+function setVideo(video) {
+    console.log(video)
+    clearTimeout(timer);
+    document.getElementById("search-results").style.display = "none";
+    
     const season = document.getElementById("fseason").value;
     const episode = document.getElementById("fepisode").value;
     
-    const movie = await fetchImdbId(name)
-    if(movie.Type == "series") isShow = true;
-    setDetails(movie, isShow);
-    
-    const url = generateUrl(isShow, movie.imdbID, season, episode);
+    const url = generateUrl(video.Type == "series" ? true : false, video.imdbID, season, episode);
     document.getElementById("embedsrc").src = url;
 }
 
@@ -27,17 +35,63 @@ function generateUrl(isShow, id, season, episode) {
     return query;
 }
 
-function setDetails(movie, isShow) {
+function setDetails(dcontainer, movie) {
     console.log(movie);
-    document.getElementById("details-container").style.display = "flex";
-    document.getElementById("d-title").innerText = movie.Title;
-    document.getElementById("d-poster").src = movie.Poster;
-    document.getElementById("d-year").innerText = movie.Year;
-    document.getElementById("d-rating").innerText = "Rated " + movie.imdbRating;
-    document.getElementById("d-genre").innerText = movie.Genre;
-    document.getElementById("d-runtime").innerText = movie.Runtime;
     
-    if(isShow) {
-        document.getElementById("d-seasons").innerText = movie.totalSeasons + " seasons";
+    dcontainer.addEventListener("click", () => { setVideo(movie) })
+    
+    const title = dcontainer.querySelector(".d-title");
+    const poster = dcontainer.querySelector(".d-poster");
+    const year = dcontainer.querySelector(".d-year");
+    const rating = dcontainer.querySelector(".d-rating");
+    const genre = dcontainer.querySelector(".d-genre");
+    const runtime = dcontainer.querySelector(".d-runtime");
+    
+    dcontainer.style.display = "flex";
+    title.innerText = movie.Title;
+    poster.style.backgroundImage = "url('" + movie.Poster + "')";
+   
+    if(movie.Year) year.innerText = movie.Year;
+    if(movie.imdbRating) rating.innerText = movie.imdbRating + " ★";
+    if(movie.Genre) genre.innerText = movie.Genre;
+    if(movie.Runtime) runtime.innerText = movie.Runtime;
+}
+
+let timer;
+function changeQuery() {
+    //wait for x milliseconds of inactivity
+    clearTimeout(timer);
+    timer = setTimeout(search.bind(this), 1000);
+}
+
+async function search() {
+    const name = document.getElementById("fname").value;
+    console.log(name)
+    
+    const res = await fetch("https://www.omdbapi.com/?s=" + name.replace(/ /g, '+') + "&apikey=edb86f79")
+    const results = await res.json();
+    console.log(results)
+    
+    const searchResults = document.getElementById("search-results");
+    while (searchResults.children.length > 1) {
+        searchResults.removeChild(searchResults.lastChild);
     }
+    
+    const dcontainers = [searchResults.querySelector(".details-container")]
+    let last = dcontainers[0];
+    let n = "";
+    
+    for(let i = 0; i < results.Search.length; i++) {
+        searchResults.style.display = "flex";
+        last = dcontainers[dcontainers.length - 1];
+        
+        if(i >= dcontainers.length) { //add new dcontainer
+            n = last.cloneNode(true);
+            dcontainers.push(n);
+            last.insertAdjacentElement('afterend', n);
+            last = n;
+        }
+        setDetails(dcontainers[i], results.Search[i]);
+    }
+    
 }

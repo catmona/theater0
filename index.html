@@ -17,7 +17,7 @@
         <form onSubmit="submitForm(event)" class="media-form">
             
             <div id="search">
-                <input class="media-input-name" id="fname" name="mediaName" type="text" placeholder="Search..." autofocus/>
+                <input class="media-input-name" id="fname" oninput="changeQuery()" name="mediaName" type="text" placeholder="Search..." autofocus/>
                 <label class="submit">
                     <input type="submit" value="" style="display: none"">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -46,18 +46,18 @@
            
         </form>
     </div>
-    <div id="details-container">
-        <h1 id="d-title"></h1>
-        <div class="row">
-            <img id="d-poster" />
+    
+    <div id="search-results">
+        <div class="details-container">
+            <div class="d-poster">
+                <h2 class="d-title"></h2>
+            </div>
+            
             <div class="details-list">
-                <h3 id="d-genre"></h3>
-                <h3 id="d-year"></h3>
-                <h3 id="d-metascore"></h3>
-                <h3 id="d-rating"></h3>
-                <h3 id="d-runtime"></h3>
-                <h3 id="d-seasons"></h3>
-                
+                <p class="d-runtime"></p>  
+                <p class="d-genre"></p>
+                <p class="d-rating"></p>
+                <p class="d-year"></p>
             </div>
         </div>
     </div>
