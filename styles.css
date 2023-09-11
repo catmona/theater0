@@ -19,6 +19,8 @@ body {
     gap: 10px;
     margin-top: 10px;
     display: none;
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 .details-container {
