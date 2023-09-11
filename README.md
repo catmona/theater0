@@ -5,3 +5,6 @@ A simple frontend for searching for media through the https://www.omdbapi.com/, 
 
 You can visit and use the site at https://vidsrc-frontend.onrender.com/
 
+![image](https://github.com/catmona/vidsrc-frontend/assets/30540400/3a36e268-c669-49c5-bd7f-9b775c840306)
+
+
