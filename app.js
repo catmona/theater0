@@ -23,7 +23,7 @@ async function fetchImdbId(title) {
 function generateUrl(isShow, id, season, episode) {
     let query = "https://vidsrc.me/embed/" + id;
     if(isShow) query = "https://vidsrc.me/embed/"+ id + "/" + season + "-" + episode;
-    
+    console.log(query);
     return query;
 }
 
