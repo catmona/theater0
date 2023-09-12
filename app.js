@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+const TMDB_KEY = process.TMDB_KEY;
+
 async function submitForm(e) {
     e.preventDefault();
     clearTimeout(timer);
@@ -95,3 +100,69 @@ async function search() {
     }
     
 }
+
+async function queryTMDB(query, type) {
+    const url = 'https://api.themoviedb.org/3/search/' + type + '?include_adult=false&language=en-US&page=1'  + "&query=" + query.replace(/ /g, '%20');
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + TMDB_KEY
+        }
+      };
+      
+      const res = await fetch(url, options);
+      const results = await res.json();
+      console.log(results);
+      
+      return results.results;
+}
+
+async function detailsTMDB(id, type) {
+    const url = 'https://api.themoviedb.org/3/' + type + '/' + id + '?language=en-US';
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + TMDB_KEY
+        }
+      };
+      
+      const res = await fetch(url, options);
+      const details = await res.json();
+      console.log(details);
+      
+      return details;
+}
+
+async function clickPreview(preview, type) {
+    showDiscover(true);
+    const details = await detailsTMDB(preview.id, type);
+    
+    
+    
+    if(type == "TV") {
+        showTVInfo(true);
+    }
+}
+
+function showDiscover(show) {
+    if(!show) { //hide
+        clearTimeout(timer);
+        document.getElementById("search-results").style.display = "none";
+    }
+    else { //show
+        document.getElementById("search-results").style.display = "flex";
+    }
+}
+
+function showTVInfo(show) {
+    if(!show) { //hide
+        
+    }
+    else { //show
+        
+    }
+}
+
+
