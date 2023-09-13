@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>the show lookerupperinator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
 </head>
 <body>
     <div>
@@ -14,10 +14,10 @@
         </h1>
     </div>
     <div class="form-container">
-        <form onSubmit="submitForm(event)" class="media-form">
+        <form class="media-form" id="media-form">
             
             <div id="search">
-                <input class="media-input-name" id="fname" oninput="changeQuery()" name="mediaName" type="text" placeholder="Search..." autofocus/>
+                <input class="media-input-name" id="fname" name="mediaName" type="text" placeholder="Search..." autofocus/>
                 <label class="submit">
                     <input type="submit" value="" style="display: none"">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -47,7 +47,7 @@
         </form>
     </div>
     
-    <div id="search-results">
+    <div id="movie-results" class="results">
         <div class="details-container">
             <div class="d-poster">
                 <h2 class="d-title"></h2>
@@ -55,7 +55,20 @@
             
             <div class="details-list">
                 <p class="d-runtime"></p>  
-                <p class="d-genre"></p>
+                <p class="d-rating"></p>
+                <p class="d-year"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="TV-results" class="results"> 
+        <div class="details-container">
+            <div class="d-poster">
+                <h2 class="d-title"></h2>
+            </div>
+            
+            <div class="details-list">
+                <p class="d-runtime"></p>  
                 <p class="d-rating"></p>
                 <p class="d-year"></p>
             </div>

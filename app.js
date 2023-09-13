@@ -1,92 +1,72 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
-const TMDB_KEY = process.TMDB_KEY;
+const TMDB_KEY = process.env.TMDB_KEY;
 
-async function submitForm(e) {
-    e.preventDefault();
-    clearTimeout(timer);
-    document.getElementById("search-results").style.display = "none";
-    
-    const name = document.getElementById("fname").value;
-    const video = await fetchImdbId(name)
-    
-    setVideo(video)
+window.onload = function() {
+    document.getElementById("fname").addEventListener("input", changeQuery);
 }
 
-function setVideo(video) {
-    console.log(video)
-    clearTimeout(timer);
-    document.getElementById("search-results").style.display = "none";
-    
-    const season = document.getElementById("fseason").value;
-    const episode = document.getElementById("fepisode").value;
-    
-    const url = generateUrl(video.Type == "series" ? true : false, video.imdbID, season, episode);
-    document.getElementById("embedsrc").src = url;
-}
-
-async function fetchImdbId(title) {
-    const res = await fetch("https://www.omdbapi.com/?t=" + title.replace(/ /g, '+') + "&apikey=edb86f79");
-    const movie = await res.json();
-    
-    return await movie;
-}
-
-function generateUrl(isShow, id, season, episode) {
+function url_vidsrc(isShow, id) {
     let query = "https://vidsrc.me/embed/" + id;
     if(isShow) query = "https://vidsrc.me/embed/"+ id + "/" + season + "-" + episode;
     console.log(query);
     return query;
 }
 
-function setDetails(dcontainer, movie) {
+function getPoster(path) {
+    return "https://image.tmdb.org/t/p/w500" + path;
+}
+
+function setDetails(dcontainer, movie, type) {
     console.log(movie);
     
-    dcontainer.addEventListener("click", () => { setVideo(movie) })
+    dcontainer.addEventListener("click", () => { clickPreview(movie, type) })
     
     const title = dcontainer.querySelector(".d-title");
     const poster = dcontainer.querySelector(".d-poster");
     const year = dcontainer.querySelector(".d-year");
     const rating = dcontainer.querySelector(".d-rating");
-    const genre = dcontainer.querySelector(".d-genre");
-    const runtime = dcontainer.querySelector(".d-runtime");
     
     dcontainer.style.display = "flex";
-    title.innerText = movie.Title;
-    poster.style.backgroundImage = "url('" + movie.Poster + "')";
+    title.innerText = movie.title;
+    poster.style.backgroundImage = "url('" + getPoster(movie.poster_path) + "')";
    
-    if(movie.Year) year.innerText = movie.Year;
-    if(movie.imdbRating) rating.innerText = movie.imdbRating + " ★";
-    if(movie.Genre) genre.innerText = movie.Genre;
-    if(movie.Runtime) runtime.innerText = movie.Runtime;
+    if(movie.Year) year.innerText = movie.release_date;
+    if(movie.imdbRating) rating.innerText = movie.vote_average + " ★";
 }
 
 let timer;
 function changeQuery() {
     //wait for x milliseconds of inactivity
     clearTimeout(timer);
-    timer = setTimeout(search.bind(this), 1000);
+    timer = setTimeout(search.bind(this), 200);
 }
 
 async function search() {
-    const name = document.getElementById("fname").value;
-    console.log(name)
+    const query = document.getElementById("fname").value;
+    console.log(query)
     
-    const res = await fetch("https://www.omdbapi.com/?s=" + name.replace(/ /g, '+') + "&apikey=edb86f79")
-    const results = await res.json();
-    console.log(results)
+    getResults(query, "movie");
+    //getResults(query, "TV");
+}
+
+async function getResults(query, type) {
+    let results = await queryTMDB(query, type);
     
-    const searchResults = document.getElementById("search-results");
+    //remove all but first search result
+    const searchResults = document.getElementById(type + "-results");
     while (searchResults.children.length > 1) {
         searchResults.removeChild(searchResults.lastChild);
     }
     
+    //prepare array of search results
     const dcontainers = [searchResults.querySelector(".details-container")]
     let last = dcontainers[0];
     let n = "";
     
-    for(let i = 0; i < results.Search.length; i++) {
+    //add search results to display
+    for(let i = 0; i < results.length; i++) {
         searchResults.style.display = "flex";
         last = dcontainers[dcontainers.length - 1];
         
@@ -96,13 +76,12 @@ async function search() {
             last.insertAdjacentElement('afterend', n);
             last = n;
         }
-        setDetails(dcontainers[i], results.Search[i]);
+        setDetails(dcontainers[i], results[i], type);
     }
-    
 }
 
 async function queryTMDB(query, type) {
-    const url = 'https://api.themoviedb.org/3/search/' + type + '?include_adult=false&language=en-US&page=1'  + "&query=" + query.replace(/ /g, '%20');
+    const url = 'https://api.themoviedb.org/3/search/' + type + '?include_adult=false&language=en-US&page=1'  + "&query=" + query.replace(/ /g, '+');
     const options = {
         method: 'GET',
         headers: {
@@ -114,6 +93,7 @@ async function queryTMDB(query, type) {
       const res = await fetch(url, options);
       const results = await res.json();
       console.log(results);
+      showDiscover(true);
       
       return results.results;
 }
@@ -135,24 +115,47 @@ async function detailsTMDB(id, type) {
       return details;
 }
 
+let selectedSeason = 1;
+let selectedEpisode = 1;
+
 async function clickPreview(preview, type) {
-    showDiscover(true);
+    showDiscover(false);
     const details = await detailsTMDB(preview.id, type);
     
-    
-    
     if(type == "TV") {
+        //have to get season & episode info first
         showTVInfo(true);
+        // SET SEASON & EPISODE
+    }
+    else {
+        //show movie right away
+        const url = await getVideo(details.imdb_id, type);
+        showVideo(url);
     }
 }
+
+function getVideo(id, type) {    
+    //try vidsrc
+    let url = url_vidsrc(type == "TV" ? true : false, id);
+    if(!url) return null;
+    
+    
+    //set video
+    return url;
+}
+
+function showVideo(url) {
+    document.getElementById("embedsrc").src = url;
+}
+
 
 function showDiscover(show) {
     if(!show) { //hide
         clearTimeout(timer);
-        document.getElementById("search-results").style.display = "none";
+        document.getElementById("movie-results").style.display = "none";
     }
     else { //show
-        document.getElementById("search-results").style.display = "flex";
+        document.getElementById("movie-results").style.display = "flex";
     }
 }
 

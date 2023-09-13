@@ -12,7 +12,7 @@ body {
     height: 100%;
 }
 
-#search-results {
+.results {
     display: flex;
     flex-direction: column;
     z-index: 2;
