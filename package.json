@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "parcel": "^2.9.3"
   },
   "name": "vidsrc-frontend",
   "description": "A simple frontend for searching for media through the https://www.omdbapi.com/, and find that media using https://vidsrc.me/",
