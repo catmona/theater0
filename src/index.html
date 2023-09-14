@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the show lookerupperinator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="app.ts" type="module"></script>
+</head>
+<body>
+    <div>
+        <h1>
+            The Show Looker-Upper-inator!
+        </h1>
+    </div>
+    <div class="form-container">
+        <form class="media-form" id="media-form">
+            
+            <div id="search">
+                <input class="media-input-name" id="fname" name="mediaName" type="text" placeholder="Search..." autofocus/>
+                <label class="submit">
+                    <input type="submit" value="" style="display: none"">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </label>
+            </div>
+
+
+            <!-- <div class="media-input-group">
+                <label class="media-label">Series</label>
+                <input class="media-input-checkbox" id="ftype" name="mediaType" type="checkbox"/>
+            </div> -->
+            
+            <div class="media-input-group">
+                <div>
+                    <label class="media-label">Season</label>
+                    <input class="media-input-number" id="fseason" name="mediaSeason" type="number" value="1"/>
+                </div>
+                
+                <div>
+                    <label class="media-label">Episode</label>
+                    <input class="media-input-number" id="fepisode" name="mediaEpisode" type="number" value="1"/>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+    
+    <div id="search-results">
+        
+        <div class="results-container">
+            <h3>Movies</h3>
+            <div id="movie-results" class="results">
+                <div class="details-container">
+                    <h2 class="d-title"></h2>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="results-container">
+            <h3>TV Shows</h3>
+            <div id="tv-results" class="results"> 
+                <div class="details-container">
+                    <div class="d-poster">
+                        <h2 class="d-title"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    <div class="vid-container">
+        <div class="h_iframe">
+            <iframe height="2" width="2" allowfullscreen="true" id="embedsrc"></iframe>
+            </iframe>
+        </div>
+    </div>
+</body>
+</html>

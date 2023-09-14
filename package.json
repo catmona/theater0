@@ -1,27 +1,41 @@
 {
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "parcel": "^2.9.3"
-  },
-  "name": "vidsrc-frontend",
-  "description": "A simple frontend for searching for media through the https://www.omdbapi.com/, and find that media using https://vidsrc.me/",
-  "version": "1.0.0",
-  "type": "module",
-  "devDependencies": {
-    "buffer": "^6.0.3",
-    "crypto-browserify": "^3.12.0",
-    "events": "^3.3.0",
-    "os-browserify": "^0.3.0",
-    "parcel": "^2.9.3",
-    "path-browserify": "^1.0.1",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0"
-
-  },
-  "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "theater0",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "bunx --bun vite",
+        "build": "bunx --bun vite build",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "bunx --bun vite preview"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.7.17",
+        "dotenv": "^16.3.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.6.0",
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "@vitejs/plugin-react": "^4.0.3",
+        "@vitejs/plugin-react-swc": "^3.3.2",
+        "autoprefixer": "^10.4.15",
+        "bun-types": "^1.0.1",
+        "eslint": "^8.45.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.3",
+        "eslint-plugin-tailwindcss": "^3.13.0",
+        "postcss": "^8.4.29",
+        "prettier": "^3.0.3",
+        "react-refresh": "0.10.0",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.0.2",
+        "vite": "^4.4.5"
+    }
 }
