@@ -4,7 +4,6 @@ import { Video } from '../globals';
 interface props {
     setMovieResults: (videos: Video[]) => void;
     setTVResults: (videos: Video[]) => void;
-    TMDB_KEY: string;
 }
 
 interface ISearchResults {
@@ -20,10 +19,11 @@ interface ISearchResult {
 }
 
 export default function SearchBar(props: props) {
-    const { setMovieResults, setTVResults, TMDB_KEY } = props;
+    const { setMovieResults, setTVResults } = props;
     const [query, setQuery] = useState('');
     const timer = useRef<NodeJS.Timeout>();
     const SEARCH_TIMER = 200;
+    const TMDB_KEY = import.meta.env.VITE_TMDB_KEY as string;
 
     useEffect(() => {
         //wait for SEARCH_TIMER milliseconds of inactivity
@@ -83,9 +83,10 @@ export default function SearchBar(props: props) {
     }
 
     return (
-        <form>
-            <div>
+        <form className="w-full pl-{15%} pr-{15%}">
+            <div className="w-full border border-green-300 bg-red-300 p-1 text-lg font-bold text-yellow-200 shadow placeholder:text-orange-200">
                 <input
+                    className=""
                     type="text"
                     placeholder="Search..."
                     autoFocus
@@ -93,11 +94,11 @@ export default function SearchBar(props: props) {
                     onChange={(e) => setQuery(e.target.value)}
                     onSubmit={(e) => {
                         e.preventDefault();
-                        search();
+                        void search();
                     }}
                 />
                 <label>
-                    <input type="submit" className="hidden" />
+                    <input type="submit" className="mr-1 mt-1 hidden cursor-pointer content-none hover:text-blue-200" />
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>

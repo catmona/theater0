@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config(); // load env vars from .env
 
-const TMDB_KEY = process.env.TMDB_KEY as string;
-
 interface ISearchResults {
     results: ISearchResult[];
 }
@@ -87,7 +85,7 @@ async function queryTMDB(query: string, type: string): Promise<ISearchResult[]> 
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer ' + TMDB_KEY,
+            Authorization: 'Bearer ' + import.meta.env.VITE_TMDB_KEY,
         },
     };
 
@@ -152,7 +150,7 @@ async function detailsTMDB(tmdb_id: string, type: string): Promise<string> {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer ' + TMDB_KEY,
+            Authorization: 'Bearer ' + import.meta.env.VITE_TMDB_KEY,
         },
     };
 

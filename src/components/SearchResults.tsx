@@ -2,8 +2,8 @@ import { Video } from '../globals';
 import { VideoTrack } from './VideoTrack';
 
 interface props {
-    movieResults: Video[];
-    TVResults: Video[];
+    movieResults: Video[] | undefined;
+    TVResults: Video[] | undefined;
     setVideo: (video: Video) => void;
 }
 export default function SearchResults(props: props) {
@@ -11,8 +11,8 @@ export default function SearchResults(props: props) {
 
     return (
         <div className="flex flex-col">
-            <VideoTrack heading="Movies" videos={movieResults} setVideo={setVideo} />
-            <VideoTrack heading="TV Shows" videos={TVResults} setVideo={setVideo} />
+            {movieResults ? <VideoTrack heading="Movies" videos={movieResults} setVideo={setVideo} /> : null}
+            {TVResults ? <VideoTrack heading="TV Shows" videos={TVResults} setVideo={setVideo} /> : null}
         </div>
     );
 }
