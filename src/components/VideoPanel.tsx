@@ -57,9 +57,9 @@ export default function VideoPanel(props: props) {
         <div
             onClick={void clickPanel}
             style={{ backgroundImage: img }}
-            className="flex h-44 w-72 cursor-pointer select-none bg-cover text-center shadow"
+            className="flex h-[150px] w-[250px] min-w-[250px] max-w-[250px] cursor-pointer select-none bg-cover text-center shadow"
         >
-            <h2 className="relative text-white shadow font-bold text-lg w-full h-full flex justify-center items-center text-center backdrop-blur-{1px} backdrop-grayscale-{40%} backdrop-brightness-95 hover:backdrop-filter-none hover:backdrop-blur-{1px} hover:text-black">
+            <h2 className="relative flex h-full w-full items-center justify-center text-center text-lg font-bold text-white shadow backdrop-blur-[1px] backdrop-brightness-95 backdrop-grayscale-[40%] hover:text-black hover:backdrop-blur-[1px] hover:backdrop-filter-none">
                 {title}
             </h2>
         </div>

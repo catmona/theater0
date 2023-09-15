@@ -30,7 +30,7 @@ export default function VideoPlayer(props: props) {
     }
 
     return (
-        <div className="w-{80%} mt-5 ml-auto mr-auto flex-grow">
+        <div className="mx-auto mt-5 w-[80%] grow">
             {url ? <iframe className="relative left-0 top-0 h-80 w-full" height="2" width="2" allowFullScreen={true} src={url} /> : null}
         </div>
     );

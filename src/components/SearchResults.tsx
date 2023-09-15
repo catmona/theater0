@@ -9,6 +9,8 @@ interface props {
 export default function SearchResults(props: props) {
     const { movieResults, TVResults, setVideo } = props;
 
+    //console.log(movieResults);
+
     return (
         <div className="flex flex-col">
             {movieResults ? <VideoTrack heading="Movies" videos={movieResults} setVideo={setVideo} /> : null}
