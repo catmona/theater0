@@ -3,10 +3,11 @@ import { Video } from '../globals';
 
 interface props {
     video: Video | undefined;
+    hide: boolean;
 }
 
 export default function VideoPlayer(props: props) {
-    const { video } = props;
+    const { video, hide } = props;
     const [url, setUrl] = useState('');
 
     useEffect(() => {
@@ -29,9 +30,9 @@ export default function VideoPlayer(props: props) {
         return query;
     }
 
-    return (
-        <div className="mx-auto mt-5 w-[80%] grow">
-            {url ? <iframe className="relative left-0 top-0 h-80 w-full" height="2" width="2" allowFullScreen={true} src={url} /> : null}
+    return hide ? null : (
+        <div className="mx-auto my-[5%] w-[80%] grow">
+            {url ? <iframe className="relative left-0 top-0 h-full w-full" height="2" width="2" allowFullScreen={true} src={url} /> : null}
         </div>
     );
 }

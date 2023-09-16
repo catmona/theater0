@@ -9,12 +9,12 @@ interface props {
 export default function SearchResults(props: props) {
     const { movieResults, TVResults, setVideo } = props;
 
-    //console.log(movieResults);
+    //console.log(movieResults == undefined);
 
     return (
         <div className="flex flex-col">
-            {movieResults ? <VideoTrack heading="Movies" videos={movieResults} setVideo={setVideo} /> : null}
-            {TVResults ? <VideoTrack heading="TV Shows" videos={TVResults} setVideo={setVideo} /> : null}
+            {movieResults && movieResults.length > 0 ? <VideoTrack heading="Movies" videos={movieResults} setVideo={setVideo} /> : null}
+            {TVResults && TVResults.length > 0 ? <VideoTrack heading="TV Shows" videos={TVResults} setVideo={setVideo} /> : null}
         </div>
     );
 }

@@ -22,6 +22,7 @@ export default function VideoPanel(props: props) {
     }, []);
 
     async function clickPanel() {
+        console.log('click');
         video.imdb_id = await getIMDB();
         setVideo(video);
     }
@@ -55,7 +56,7 @@ export default function VideoPanel(props: props) {
 
     return (
         <div
-            onClick={void clickPanel}
+            onClick={clickPanel}
             style={{ backgroundImage: img }}
             className="flex h-[150px] w-[250px] min-w-[250px] max-w-[250px] cursor-pointer select-none bg-cover text-center shadow"
         >
