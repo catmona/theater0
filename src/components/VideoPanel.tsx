@@ -19,7 +19,7 @@ export default function VideoPanel(props: props) {
     useEffect(() => {
         setTitle(video.title);
         setImg(getImg());
-    });
+    }, [video.title, getImg]);
 
     async function clickPanel() {
         console.log('click');
