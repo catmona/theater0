@@ -71,6 +71,7 @@ export default function SearchBar(props: props) {
     }
 
     function format(unformatted: ISearchResult, type: string): Video {
+        //console.log(unformatted);
         const video: Video = {
             tmdb_id: unformatted.id,
             imdb_id: '',
@@ -78,6 +79,8 @@ export default function SearchBar(props: props) {
             poster_path: unformatted.poster_path,
             backdrop_path: unformatted.poster_path,
             type: type,
+            season: 1,
+            episode: 1,
         };
 
         if (type == 'tv') {

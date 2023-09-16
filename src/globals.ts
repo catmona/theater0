@@ -5,4 +5,6 @@ export interface Video {
     poster_path: string;
     backdrop_path: string;
     type: string;
+    season: number;
+    episode: number;
 }

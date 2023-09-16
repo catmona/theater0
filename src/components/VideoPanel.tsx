@@ -19,10 +19,11 @@ export default function VideoPanel(props: props) {
     useEffect(() => {
         setTitle(video.title);
         setImg(getImg());
-    }, [video.title, getImg]);
+    }, [video]);
 
     async function clickPanel() {
-        console.log('click');
+        //console.log('click');
+
         video.imdb_id = await getIMDB();
         setVideo(video);
     }

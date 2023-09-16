@@ -24,7 +24,7 @@ export default function VideoPlayer(props: props) {
         if (!video) return '';
 
         let query = 'https://vidsrc.me/embed/' + video.imdb_id;
-        if (video.type == 'tv') query = 'https://vidsrc.me/embed/' + video.imdb_id + '/' + 1 + '-' + 1;
+        if (video.type == 'tv') query = 'https://vidsrc.me/embed/' + video.imdb_id + '/' + video.season + '-' + video.episode;
         //TODO season-episode
         //console.log(query);
         //TODO check for valid response, change to api?
