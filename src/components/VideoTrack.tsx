@@ -13,11 +13,12 @@ export function VideoTrack(props: props) {
     const [panels, setPanels] = useState<JSX.Element[]>([]);
 
     useEffect(() => {
-        console.log('new videos!');
         let elements: JSX.Element[] = [];
+
         videos.map((video, i) => {
             elements = [...elements, <VideoPanel video={video} setVideo={setVideo} key={video.type + '-' + i} />];
         });
+
         setPanels(elements);
     }, [videos]);
 

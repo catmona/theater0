@@ -36,11 +36,13 @@ export default function SearchBar(props: props) {
 
     async function search() {
         console.log('search');
-        setMovieResults([]);
-        setTVResults([]);
+        //setMovieResults([]);
+        //setTVResults([]);
 
-        setMovieResults(await getResults('movie'));
-        setTVResults(await getResults('tv'));
+        const movies = await getResults('movie');
+        const shows = await getResults('tv');
+        setMovieResults(movies);
+        setTVResults(shows);
     }
 
     async function getResults(type: string): Promise<Video[]> {

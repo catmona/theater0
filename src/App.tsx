@@ -17,7 +17,7 @@ function App() {
 
     return (
         <>
-            <div className="flex flex-col h-screen w-screen">
+            <div className="flex h-screen w-screen flex-col">
                 <h1>Theater 0</h1>
                 <SearchBar setTVResults={setTVResults} setMovieResults={setMovieResults} />
                 <SearchResults
