@@ -24,7 +24,7 @@ export function VideoTrack(props: props) {
 
     return (
         <div className="mx-[10%]">
-            <h3>{heading}</h3>
+            <h3 className="text-inactive">{heading}</h3>
             <div className="mb-5 mt-2 flex w-full flex-row justify-start gap-2 overflow-auto pb-4">{panels}</div>
         </div>
     );

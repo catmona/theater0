@@ -94,22 +94,22 @@ export default function SearchBar(props: props) {
 
     return (
         <form
-            className="w-full px-[15%]"
+            className="w-full px-[15%] mb-5"
             onSubmit={(e) => {
                 e.preventDefault();
                 void search();
             }}
         >
-            <div className="flex w-full items-center border border-green-300 bg-red-300 p-1 text-lg font-bold text-yellow-200 shadow">
+            <div className="flex w-full items-center border border-inactive bg-bg2 p-1 text-lg font-bold shadow-drop">
                 <input
-                    className="w-full bg-transparent placeholder:text-orange-200 focus:outline-none"
+                    className="w-full bg-transparent p-1 px-2 text-active placeholder:text-inactive focus:outline-none"
                     type="text"
                     placeholder="Search..."
                     autoFocus
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <label className="mr-1 cursor-pointer content-none hover:text-blue-200">
+                <label className="mr-1 cursor-pointer content-none hover:text-active text-inactive">
                     <input type="submit" className="hidden" />
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />

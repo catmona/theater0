@@ -21,7 +21,7 @@ function App() {
         if (movieResults && TVResults && [...movieResults, ...TVResults].length > 0) setHideVideo(true);
         else if (!selectedVideo) setHideVideo(true);
         else setHideVideo(false);
-    }, [movieResults, TVResults]);
+    }, [movieResults, TVResults, selectedVideo]);
 
     useEffect(() => {
         console.log(selectedVideo);
@@ -30,7 +30,7 @@ function App() {
     return (
         <>
             <div className="flex h-screen w-screen flex-col">
-                <h1>Theater 0</h1>
+                <h1 className="text-center text-lg m-4 font-bold text-inactive">Theater 0</h1>
                 <SearchBar setTVResults={setTVResults} setMovieResults={setMovieResults} />
                 <SearchResults
                     movieResults={movieResults}
@@ -39,8 +39,8 @@ function App() {
                         setVideoClear(video);
                     }}
                 />
+                {selectedVideo ? <EpisodeSelect video={selectedVideo} setVideo={setVideo} hide={hideVideo || selectedVideo.type != 'tv'} /> : null}
                 <VideoPlayer video={selectedVideo} hide={hideVideo} />
-                {selectedVideo ? <EpisodeSelect video={selectedVideo} setVideo={setVideo} hide={hideVideo && selectedVideo.type != 'tv'} /> : null}
             </div>
         </>
     );

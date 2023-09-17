@@ -51,7 +51,8 @@ export default function EpisodeSelect(props: props) {
         const res = await fetch(url, options);
         const details = (await res.json()) as ShowDetails;
 
-        return details.seasons;
+        if (details.seasons) return details.seasons;
+        return [];
     }
 
     useEffect(() => {
@@ -84,9 +85,9 @@ export default function EpisodeSelect(props: props) {
     }, [selectedEpisode]);
 
     return hide ? null : (
-        <div>
-            <Dropdown val={selectedSeason} setVal={setSelectedSeason} options={seasons.map((season) => season.name)} />
-            <Dropdown val={selectedEpisode} setVal={setSelectedEpisode} options={episodeList} />
+        <div className="flex flex-row justify-center gap-4">
+            <Dropdown prefix="" val={selectedSeason} setVal={setSelectedSeason} options={seasons.map((season) => season.name)} />
+            <Dropdown prefix="Episode " val={selectedEpisode} setVal={setSelectedEpisode} options={episodeList} />
         </div>
     );
 }
