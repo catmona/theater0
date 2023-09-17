@@ -11,6 +11,7 @@ interface props {
 interface Season {
     name: string;
     episode_count: number;
+    season_number: number;
 }
 
 interface ShowDetails {
@@ -21,11 +22,18 @@ export default function EpisodeSelect(props: props) {
     const { video, setVideo, hide } = props;
     const TMDB_KEY = import.meta.env.VITE_TMDB_KEY as string;
     const [seasons, setSeasons] = useState<Season[]>([]);
-    const [selectedSeason, setSelectedSeason] = useState(1);
+    const [selectedSeason, setSelectedSeason] = useState(0);
     const [selectedEpisode, setSelectedEpisode] = useState(0);
     const [episodeList, setEpisodeList] = useState<number[]>([]);
+    const [oldTitle, setOldTitle] = useState('');
 
     useEffect(() => {
+        if (video.title != oldTitle) {
+            setSelectedEpisode(0);
+            setSelectedSeason(0);
+            setOldTitle(video.title);
+        }
+
         const grabSeasons = async () => {
             const s = await getSeasons();
             setSeasons(s);
@@ -51,12 +59,19 @@ export default function EpisodeSelect(props: props) {
         const res = await fetch(url, options);
         const details = (await res.json()) as ShowDetails;
 
-        if (details.seasons) return details.seasons;
+        if (details.seasons) {
+            const s = details.seasons;
+            if (s.length > 0) {
+                while (s[0].season_number != 1) s.shift();
+            }
+            console.log(s);
+            return s;
+        }
         return [];
     }
 
     useEffect(() => {
-        if (!seasons || selectedSeason > seasons.length) return;
+        if (!seasons || selectedSeason > seasons.length - 1) return;
         const totalEpisodes = seasons[selectedSeason].episode_count;
         let eps: number[] = [];
         for (let i = 1; i <= totalEpisodes + 1; i++) {
@@ -67,7 +82,7 @@ export default function EpisodeSelect(props: props) {
     }, [selectedSeason, seasons]);
 
     useEffect(() => {
-        if (video.season == selectedSeason && video.episode == selectedEpisode + 1) return;
+        if (video.season == selectedSeason + 1 && video.episode == selectedEpisode + 1) return;
 
         const newvid = {
             tmdb_id: video.tmdb_id,
@@ -76,7 +91,7 @@ export default function EpisodeSelect(props: props) {
             poster_path: video.poster_path,
             backdrop_path: video.backdrop_path,
             type: video.type,
-            season: selectedSeason,
+            season: selectedSeason + 1,
             episode: selectedEpisode + 1,
         };
 
